@@ -144,10 +144,9 @@ void ST7565::drawbitmap(uint8_t x, uint8_t y,
 			uint8_t color) {
   for (uint8_t j=0; j<h; j++) {
     for (uint8_t i=0; i<w; i++ ) {
-	if((*bitmap + i + (j/8)*w) & (1<<(j%8))) {
+	if((bitmap[i + (j/8) * w]) & (1<<(j % 8))) {
 		my_setpixel(x+i, y+j, color);
 	}
-	//my_setpixel(x+i, y+j, color);
     }
   }
 
@@ -186,9 +185,8 @@ void ST7565::drawstring_P(uint8_t x, uint8_t line, const char *str) {
 }
 
 void  ST7565::drawchar(uint8_t x, uint8_t line, char c) {
-  uint8_t i;
-  for (i = 0; i<5; i++ ) {
-    st7565_buffer[x + (line * 128) ] = *font + (c * 5) + i;
+  for (uint8_t i = 0; i<5; i++ ) {
+    st7565_buffer[x + (line * 128) ] = font[(c * 5) + i];
     x++;
   }
 
