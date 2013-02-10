@@ -382,7 +382,7 @@ uint8_t ST7565::getpixel(uint8_t x, uint8_t y) {
 
 void ST7565::begin(uint8_t contrast) {
   wiringPiSetupGpio();
-  
+
   st7565_init();
   st7565_command(CMD_DISPLAY_ON);
   st7565_command(CMD_SET_ALLPTS_NORMAL);
