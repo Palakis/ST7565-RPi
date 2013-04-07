@@ -19,6 +19,7 @@ void testfillrect();
 void testdrawcircle();
 void testdrawchar();
 void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h);
+void testdrawlineanim();
 
 int main()
 {
@@ -68,8 +69,34 @@ int main()
 	usleep(2000000);
 	glcd.clear();
 
+	testdrawlineanim();
+	glcd.clear();
+	glcd.display();
+	usleep(500000);
 	testdrawbitmap(logo16_glcd_bmp, 16, 16);
 	return 0;
+}
+
+void testdrawlineanim()
+{
+	int width = 50;
+	int height = 10;
+	
+	int x = (128 - width) / 2;
+	int y = (64 - height) / 2;
+
+	int step = 0;
+	int maxi = width - 2;
+	while(step < maxi) {
+		glcd.clear();
+		//glcd.drawline(step, 0, step, 64, BLACK);
+		glcd.drawrect(x, y, width, height, BLACK);
+		glcd.fillrect(x+1, y, step, height, BLACK);
+		glcd.display();
+
+		step++;
+		usleep(100000);
+	}
 }
 
 #define NUMFLAKES 10
@@ -94,7 +121,7 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h)
 			glcd.drawbitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, BLACK);
 		}
 		glcd.display();
-		usleep(200000);
+		usleep(100000);
 
 		for(int f = 0; f < NUMFLAKES; f++) {
 			glcd.drawbitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, 0);
