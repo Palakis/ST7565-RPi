@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 #include "ST7565/ST7565.cpp"
 
 // Numéros GPIO Broadcom

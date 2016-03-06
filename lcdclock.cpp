@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <sstream>
+#include <unistd.h>
 #include "ST7565/ST7565.cpp"
 #include "minecrafter_font.c"
 
